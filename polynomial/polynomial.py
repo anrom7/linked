@@ -39,16 +39,16 @@ class Polynomial :
         return result
 
     # Polynomial addition: newPoly = self + rhsPoly.
-    def __add__(self, rhsPoly):
-        pass
+    #def __add__(self, rhsPoly):
+    #    pass
 
     # Polynomial subtraction: newPoly = self - rhsPoly.
     def __sub__(self, rhsPoly):
         pass
 
     # Polynomial multiplication: newPoly = self * rhsPoly.
-    def __mul__(self, rhsPoly):
-        pass
+    #def __mul__(self, rhsPoly):
+    #    pass
 
     def simple_add(self, rhsPoly):
         newPoly = Polynomial()
@@ -109,6 +109,39 @@ class Polynomial :
 
         return newPoly
 
+    def __mul__(self, rhsPoly):
+        assert self.degree() >= 0 and rhsPoly.degree() >= 0, "Multiplication only allowed on non -empty polynomials."
+
+        # Create a new polynomial by multiplying rhsPoly by the first term.
+        node = self._polyHead
+        newPoly = rhsPoly._termMultiply(node)
+
+        # Iterate through the remaining terms of the poly computing the
+        # product of the rhsPoly by each term.
+        node = node.next
+        while node is not None:
+            tempPoly = rhsPoly._termMultiply(node)
+            newPoly = newPoly + tempPoly
+            node = node.next
+        return newPoly
+
+    # Helper method for creating a new polynomial from multiplying an
+    # existing polynomial by another term.
+    def _termMultiply(self, termNode):
+        newPoly = Polynomial()
+        # Iterate through the terms and compute the product of each term and
+        # the term in termNode.
+        curr = self._polyHead
+        while curr is not None:
+            # Compute the product of the term.
+            newDegree = curr.degree + termNode.degree
+            newCoeff = curr.coefficient * termNode.coefficient
+            # Append it to the new polynomial.
+            newPoly._appendTerm(newDegree, newCoeff)
+            # Advance the current pointer.
+            curr = curr.next
+        return newPoly
+
     def __str__(self):
         pass
 
@@ -118,3 +151,10 @@ class _PolyTermNode(object):
         self.degree = degree
         self.coefficient = coefficient
         self.next = None
+
+    def __str__(self):
+        """
+        Prints the value stored in self.
+        __str__: Node -> Str
+        """
+        return str(self.coefficient) + "x" + str(self.degree)
