@@ -27,3 +27,4 @@ for count in range(1, 6):
 probe = head.next
 while probe is not head:
     print("!", probe.data)
+    probe = probe.next
