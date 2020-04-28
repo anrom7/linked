@@ -11,11 +11,14 @@ tail = head
 
 # Add four nodes to the end of the doubly linked structure
 for data in range(2, 6):
-    tail.next = TwoWayNode(data, tail)
+    node = TwoWayNode(data, tail)
+    print('1', node.data, node.next, node.previous)
+    tail.next = node
     tail = tail.next
+    print('2', node.data, node.next, node.previous)
 
 # Print the contents of the linked structure in reverse order
 probe = tail
-while probe != None:
+while probe is not None:
     print(probe.data)
     probe = probe.previous
