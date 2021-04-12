@@ -1,5 +1,5 @@
 """
-File: test_node.py
+File: node_probe.py
 
 Tests the Node class.
 """
