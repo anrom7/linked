@@ -63,6 +63,16 @@ class Polynomial :
             new_poly._append_term(i, value)
             i += 1
         return new_poly
+    
+    # Helper method for appending terms to the polynomial.
+    def_append_term(self, degree, coefficient):
+        if coefficient != 0.0:
+            new_term =_PolyTermNode(degree, coefficient)
+            if self._poly_head is None:
+                self._poly_head = new_term 
+            else:
+                self._poly_tail.next = new_term
+            self._poly_tail = new_term
 
     def __str__(self):
         pass
