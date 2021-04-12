@@ -1,5 +1,5 @@
 """
-File: test_twowaynode.py
+File: twowaynode_probe.py
 Tests the TwoWayNode class.
 """
 
